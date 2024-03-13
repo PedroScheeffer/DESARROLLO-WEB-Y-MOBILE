@@ -1,0 +1,21 @@
+#primerDiv {
+    background-color: black;
+    color: white;
+}
+
+#segundoDiv {
+    color: greenyellow;
+}
+
+.parafo {
+    color: pink;
+    background-color: darkslategrey;
+}
+
+.parafoBig {
+    font-size: 1.5rem;
+}
+
+p {
+    text-align: center;
+}

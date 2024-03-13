@@ -1,6 +1,6 @@
 body {
     background-color: black;
-    margin: 3rem;
+    margin: 1% 5%;
     font-size: 1.1rem;
     color:azure
 }
@@ -9,6 +9,9 @@ p:hover {
     color: rgb(112, 255, 112);
 }
 
+li {
+    margin: 0.4rem;
+}
 li::marker {
     content: "🌭";
 }
@@ -23,7 +26,7 @@ li + li{
 }
 
 .parafo + .parafo {
-    background-color: lime;
+    background-color: brown;
 }
 
 .parafoBig {

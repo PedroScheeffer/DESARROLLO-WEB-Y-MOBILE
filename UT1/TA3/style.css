@@ -1,8 +1,15 @@
 body {
     background-color: black;
-    margin: 1% 5%;
+    margin: 2vh 10vw;
     font-size: 1.1rem;
-    color:azure
+    color: azure
+}
+
+@media (width > 800px) {
+    body {
+        margin: 2vh 15vw;
+        font-size: 1.1rem;
+    }
 }
 
 p:hover {
@@ -10,13 +17,14 @@ p:hover {
 }
 
 li {
-    margin: 0.4rem;
+    margin: 5vw;
 }
+
 li::marker {
     content: "🌭";
 }
 
-li + li{
+li+li {
     background-color: darkslategray;
 }
 
@@ -25,7 +33,7 @@ li + li{
     background-color: grey;
 }
 
-.parafo + .parafo {
+.parafo+.parafo {
     background-color: brown;
 }
 

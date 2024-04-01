@@ -13,14 +13,11 @@ body {
     background-color: var(--light);
     margin: 0px;
     padding: 0px;
+    font-size: 1.1rem;
 }
 
-li {
-    margin-bottom: 0.2rem;
-    background-color: var(--secondary);
-}
 
-.top-bar{
+.top-bar {
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -30,21 +27,17 @@ li {
     margin-bottom: 0.4rem;
 }
 
-#title-top-bar{
+#title-top-bar {
     justify-self: flex-start;
 }
 
-button{
-    background-color: var(--secondary);
-    border-color: var(--light);
-    border-style: hidden;
-}
+
 .table {
+    align-self: center;
     display: flex;
-    flex-wrap: nowrap;
     flex-direction: column;
     align-items: center;
-    max-width: 92%;
+    
 }
 
 .box {
@@ -54,16 +47,20 @@ button{
     gap: 0.6rem;
     /* box border */
     border-style: solid;
-    border-color: var(--dark);
+    border-color: var(--light);
     border-width: 1px;
     border-radius: 4px;
 
     padding: 0.4rem;
     width: 90%;
-
-    min-width: 26%;
     margin: 0.2rem;
     background-color: var(--primary-light);
+}
+
+button {
+    background-color: var(--secondary);
+    border-color: var(--light);
+    border-style: hidden;
 }
 
 .card {
@@ -83,10 +80,23 @@ button{
     padding-top: 0.1rem;
 }
 
+li {
+    margin-bottom: 0.2rem;
+    border: 0rem;
+}
+
 .cardMenuButton {
     align-self: flex-end;
 }
 
+#todo-input {
+    width: fit-content;
+    background-color: var(--secondary);
+    width: 86%;
+    
+}
+
+/* Icons  */
 .material-symbols-outlined {
     font-variation-settings:
         'FILL' 0,
@@ -99,8 +109,17 @@ button{
     .table {
         flex-direction: row;
         max-width: 80rem;
-        min-width: 40rem;
+        min-width: 50rem;
         align-items: flex-start;
     }
-    
+}
+
+
+.cabin-font {
+    font-family: "Cabin", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
 }

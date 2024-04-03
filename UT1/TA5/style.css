@@ -80,7 +80,13 @@ button {
     padding-top: 0.1rem;
 }
 
+#boxMenuTop {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
 
+}
 .boxMenuButton {
     align-self: flex-end;
 }

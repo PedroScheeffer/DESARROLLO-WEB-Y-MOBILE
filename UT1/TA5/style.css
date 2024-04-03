@@ -80,12 +80,8 @@ button {
     padding-top: 0.1rem;
 }
 
-li {
-    margin-bottom: 0.2rem;
-    border: 0rem;
-}
 
-.cardMenuButton {
+.boxMenuButton {
     align-self: flex-end;
 }
 

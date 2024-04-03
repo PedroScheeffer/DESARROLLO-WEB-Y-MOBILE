@@ -1,11 +1,20 @@
-const addTodoButtons = document.getElementsByClassName("add-todo-item");
 let tables = document.getElementsByClassName("table");
 const cardTemplate = document.getElementById("card-container");
 
 console.log(cardTemplate);
-for (let index = 0; index < addTodoButtons.length; index++) {
-    const button = addTodoButtons[index];
-    button.addEventListener('click', () => addCard(button));
+
+addEvents();
+function addEvents(){
+    const addTodoButtons = document.getElementsByClassName("add-todo-item");
+    for (let index = 0; index < addTodoButtons.length; index++) {
+        const button = addTodoButtons[index];
+        button.addEventListener('click', () => addCard(button));
+    }
+    const addEditButtons = document.getElementsByClassName("edit-card");
+    for (let index = 0; index < addEditButtons.length; index++) {
+        const button = addEditButtons[index];
+        button.addEventListener('click', () => editCardPopUp(button.parentElement));
+    }
 }
 
 
@@ -16,18 +25,25 @@ function addCard(button) {
     let cardlist = box.getElementsByClassName("card-list")[0];
     const cardClone = cardTemplate.cloneNode(true);
     cardClone.removeAttribute("id");
+    
     console.log(cardClone);
+
+    let editButton = cardClone.getElementsByClassName("edit-card")[0];
+    editButton.addEventListener('click', () => editCardPopUp(cardClone));
+
     cardlist.appendChild(cardClone);
 }
 
-function editCardPopUp(){
+function editCardPopUp(card){
     console.log("edit card pop up")
     let text = prompt('Enter new text', 'New task');
     if(text == null || text == ""){
         return;
     }
-    let card = this;
-    card.innerHTML = text;
+    let p = card.getElementsByClassName("card-text")[0];
+    p.innerHTML = text;
+
+    console.log(card);
 }
 
 // transform the input to a p and then create a new li with it input

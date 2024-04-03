@@ -86,7 +86,8 @@ button {
 
 .card {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: var(--primary);
     min-height: 10vh;
     max-height: 60vh;

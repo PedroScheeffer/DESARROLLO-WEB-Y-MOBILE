@@ -19,20 +19,21 @@
 	<nav class="top-bar light">
 		<span id="title-top-bar">Kanban</span>
 		<button class="material-symbols-outlined">
-			menu
+			Menu
 		</button>
 	</nav>
 	<div class="table">
 		<div class="box">
 			<div class="card">
 				<h3>Card type</h3>
-				<button class="cardMenuButton">🍔</button>
-				<ol>
-					<li><input type="text" maxlength="320" placeholder="Add your task here..." id="todo-input"></input>
-					<li>
+				<button class="material-symbols-outlined cardMenuButton">menu</button>
+				<ol class="todo-list">
+
 				</ol>
-				<menu>
-					<button>add item</button>
+				<menu >
+					<input type="text" maxlength="320" placeholder="Add your task here..." id="todo-input">
+					<button class="add-todo-item">add item</button>
+					</input>
 				</menu>
 			</div>
 		</div>
@@ -41,6 +42,7 @@
 		<div class="box">empty</div>
 		<div class="box">empty</div>
 	</div>
+	<script src="scripts\main.js"></script>
 </body>
 
 </html>

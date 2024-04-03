@@ -37,6 +37,9 @@ function addCard(button) {
 function editCardPopUp(card){
     console.log("edit card pop up")
     let text = prompt('Enter new text', 'New task');
+    while(text.length > 320){
+        text = prompt("The text was to long, max sizes is 320 characters", "New task");
+    }
     if(text == null || text == ""){
         return;
     }

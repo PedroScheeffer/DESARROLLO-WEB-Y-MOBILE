@@ -4,7 +4,7 @@
     --primary-light: #B3DBED;
     --secondary: #7FFFD4;
     --secondary-light: #D4FFF1;
-    --tertiary: #ffe346;
+    --tertiary: #ffcd85;
     --dark: #0A1126;
     --light: #F2F2F2;
 }
@@ -37,6 +37,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 .box {
@@ -54,6 +55,9 @@ body {
     width: 90%;
     margin: 0.2rem;
     background-color: var(--primary-light);
+
+    box-shadow: 30px 15px 5px #53527F;
+
 }
 
 .boxMenuTitle {
@@ -101,11 +105,13 @@ button {
 
     padding: 0.4rem;
     padding-top: 0.1rem;
+
 }
 
 #card-container {
     display: none;
 }
+
 .card-text {
     word-wrap: break-word;
 }

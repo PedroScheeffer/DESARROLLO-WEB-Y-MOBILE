@@ -44,7 +44,6 @@ body {
     display: flex;
     align-content: center;
     flex-direction: column;
-    gap: 0.1rem;
     /* box border */
     border-style: solid;
     border-color: var(--light);
@@ -60,17 +59,21 @@ body {
 
 }
 
-.boxMenuTitle {
+.box-menu-title {
     margin: 0.1rem
 }
 
-.boxMenuTop {
+.box-menu-top {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     padding: 0.1rem;
     margin: 0.2rem;
+}
+
+.box-menu-bottom {
+    margin: 0;
 }
 
 .boxMenuButton {
@@ -82,6 +85,7 @@ button {
     border-color: var(--light);
     border-style: hidden;
     border-radius: 4px;
+    width: 70%;
 }
 
 .add-todo-item {
@@ -97,6 +101,7 @@ button {
     min-height: 10vh;
     max-height: 60vh;
     margin-bottom: 0.25rem;
+    gap: 0.8rem;
 
     border-style: solid;
     border-color: var(--dark);

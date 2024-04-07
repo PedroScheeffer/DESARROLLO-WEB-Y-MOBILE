@@ -1,7 +1,7 @@
 let tables = document.getElementsByClassName("table");
 const cardTemplate = document.getElementById("card-container");
-
-console.log(cardTemplate);
+const editMenuTemplate = document.getElementById("edit-card-menu-template");
+let selectedCard = null;
 
 addEvents();
 function addEvents(){
@@ -15,6 +15,9 @@ function addEvents(){
         const button = addEditButtons[index];
         button.addEventListener('click', () => editCardPopUp(button.parentElement));
     }
+    const editMenuCloseButton = editMenuTemplate.getElementsByClassName("box-menu-Button")[0];
+    console.log(editMenuCloseButton);
+    editMenuCloseButton.addEventListener('click', () => close());
 }
 
 
@@ -31,6 +34,12 @@ function addCard(button) {
 }
 
 function editCardPopUp(card){
+    console.log("edit card pop up");
+    selectedCard = card;
+    menuTextArea = editMenuTemplate.getElementsByTagName("textarea")[0];
+    menuTextArea.value = card.getElementsByClassName("card-text")[0].innerHTML;
+    editMenuTemplate.style.display = "flex";
+    /*
     console.log("edit card pop up")
     let text = prompt('Enter new text', 'New task');
     while(text.length > 320){
@@ -43,6 +52,18 @@ function editCardPopUp(card){
     p.innerHTML = text;
 
     console.log(card);
+    */
+}
+
+function close(){
+    console.log("close")
+    menuTextArea = editMenuTemplate.getElementsByTagName("textarea")[0];
+    cardPElement = selectedCard.getElementsByClassName("card-text")[0];
+    cardPElement.innerHTML = menuTextArea.value; 
+    selectedCard = null;
+    editMenuTemplate.style.display = "none";
+    editMenuTemplate.getElementById("edit-card-menu-content").value = ""
+
 }
 
 // transform the input to a p and then create a new li with it input

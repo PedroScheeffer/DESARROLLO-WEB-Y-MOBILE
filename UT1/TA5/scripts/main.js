@@ -21,16 +21,12 @@ function addEvents(){
 function addCard(button) {
     console.log("add Card")
     let box = button.parentNode.parentNode;
-    // crate the task
+    // crate the box
     let cardlist = box.getElementsByClassName("card-list")[0];
     const cardClone = cardTemplate.cloneNode(true);
     cardClone.removeAttribute("id");
-    
     console.log(cardClone);
-
-    let editButton = cardClone.getElementsByClassName("edit-card")[0];
-    editButton.addEventListener('click', () => editCardPopUp(cardClone));
-
+    cardClone.addEventListener('click', () => editCardPopUp(cardClone));
     cardlist.appendChild(cardClone);
 }
 

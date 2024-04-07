@@ -76,7 +76,7 @@ body {
     margin: 0;
 }
 
-.boxMenuButton {
+.box-menu-Button {
     align-self: flex-end;
 }
 
@@ -85,7 +85,6 @@ button {
     border-color: var(--light);
     border-style: hidden;
     border-radius: 4px;
-    width: 70%;
 }
 
 .add-todo-item {

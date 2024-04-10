@@ -16,40 +16,42 @@
 </head>
 
 <body class="cabin-font">
-	<nav class="top-bar light">
+	<nav class="top-bar">
 		<span id="title-top-bar">Kanban</span>
-		<button class="material-symbols-outlined">
-			Menu
+		<button id="add-new-table" class="material-symbols-outlined">
+			add
+		</button>
+		<button class="material-symbols-outlined" id="dark-mode">
+			dark_mode
 		</button>
 	</nav>
-	<div class="table">
-		<div class="box">
-			<menu class="box-menu-top">
-				<h3 class="box-menu-title">Card type</h3>
-				<button class="material-symbols-outlined box-menu-Button alingment">menu</button>
-			</menu>
-			<div class="card-list">
-				<div class="card" id="card-container">
-					<p class="card-text"></p>
+	<div id="table-container">
+		<div class="table" id="table-0">
+			<div class="box">
+				<menu class="box-menu-top">
+					<h3 class="box-menu-title">Card type</h3>
+					<button class="material-symbols-outlined box-menu-Button alingment">menu</button>
+				</menu>
+				<div class="card-list">
+					<div class="card" id="card-template">
+						<h3 class="card-title">Title</h3>
+						<p class="card-text"></p>
+					</div>
 				</div>
+				<!-- here the tasks will be -->
+				<menu class="box-menu-bottom">
+					<button class="add-todo-item">Add Card</button>
+				</menu>
 			</div>
-			<!-- here the tasks will be -->
-
-			<menu class="box-menu-bottom">
-				<button class="add-todo-item">Add Card</button>
-			</menu>
 		</div>
-
-		<div class="box">empty</div>
-		<div class="box">empty</div>
-		<div class="box">empty</div>
 	</div>
 
-	<menu id="edit-card-menu-template" class="box">
+	<dialog id="dialog-edit-menu">
+		<input type="text" class="dialog-title"></input>
 		<button class="material-symbols-outlined box-menu-Button" id="edit-card-menu-close-button">save</button>
+
 		<textarea id="edit-card-menu-content"></textarea>
-	</menu>
+	</dialog>
 	<script src="scripts\main.js"></script>
 </body>
-
 </html>

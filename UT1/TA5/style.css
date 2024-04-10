@@ -16,6 +16,12 @@ body {
     font-size: 1.1rem;
 }
 
+button {
+    background-color: var(--secondary);
+    border-color: var(--light);
+    border-style: hidden;
+    border-radius: 4px;
+}
 
 .top-bar {
     display: flex;
@@ -31,13 +37,11 @@ body {
     justify-self: flex-start;
 }
 
-
 .table {
     align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
 
 .box {
@@ -79,12 +83,6 @@ body {
     align-self: flex-end;
 }
 
-button {
-    background-color: var(--secondary);
-    border-color: var(--light);
-    border-style: hidden;
-    border-radius: 4px;
-}
 
 .add-todo-item {
     width: 5rem;
@@ -93,8 +91,7 @@ button {
 
 .card {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
     background-color: var(--primary);
     min-height: 10vh;
     max-height: 60vh;
@@ -111,10 +108,6 @@ button {
 
 }
 
-#card-container {
-    display: none;
-}
-
 .card-text {
     word-wrap: break-word;
     white-space: normal;
@@ -127,8 +120,8 @@ button {
     width: 86%;
 }
 
-#edit-card-menu-template {
-    display: none;
+#dialog-edit-menu {
+    /* display: none; */
     width: 84%;
     height: 86%;
     position: fixed;
@@ -136,6 +129,25 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
     margin: 0;
+
+}
+
+:modal {
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    /* box border */
+    border-style: solid;
+    border-color: var(--light);
+    border-width: 1px;
+    border-radius: 4px;
+
+    padding: 0.4rem;
+    width: 90%;
+    margin: 0.2rem;
+    background-color: var(--primary);
+
+    box-shadow: 30px 15px 5px #53527F;
 }
 
 #edit-card-menu-close-button {
@@ -169,10 +181,16 @@ button {
     .table {
         flex-direction: row;
         max-width: 80rem;
-        min-width: 50rem;
+        min-width: 30rem;
         align-items: flex-start;
+        align-self: flex-start;
     }
-    #edit-card-menu-template{
+
+    #table-container {
+        display: flex;
+    }
+
+    #dialog-edit-menu {
         width: 40rem;
         height: 80%;
     }

@@ -122,7 +122,7 @@ button {
     padding-top: 0.1rem;
 }
 
-.card-text {
+.card-description {
     word-wrap: break-word;
     white-space: normal;
     width: 100%;
@@ -184,9 +184,16 @@ button {
     word-wrap: break-word;
     resize: vertical;
 }
-
-.dialog-container {}
-
+.date{
+    size: 20%;
+    height: 1rem;
+ }
+.dialog-start-date {
+    .date
+}
+.dialog-end-date {
+    .date
+}
 .dialog-title {
     width: 60%;
 }

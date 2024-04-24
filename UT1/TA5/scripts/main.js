@@ -194,7 +194,7 @@ function updateCardHtml(cardHtml, cardData) {
     cardHtml.id = "id-" + cardData.id;
     cardHtml.querySelector(".card-title").innerHTML = cardData.title;
     cardHtml.querySelector(".card-assigned").innerHTML = cardData.assignedTo;
-    cardHtml.querySelector(".card-text").innerHTML = cardData.description;
+    cardHtml.querySelector(".card-description").innerHTML = cardData.description;
     cardHtml.querySelector(".card-start-date").innerHTML = cardData.startDate;
     cardHtml.querySelector(".card-end-date").innerHTML = cardData.endDate;
     cardHtml.querySelector(".card-status").innerHTML = cardData.status;
@@ -209,7 +209,7 @@ function dialogPopUp(cardData) {
     editedTaskId = cardData;
     EditMenuDialog.querySelector(".dialog-title").innerHTML = cardData.title;
     EditMenuDialog.querySelector(".dialog-assigned").innerHTML = cardData.assignedTo;
-    EditMenuDialog.querySelector(".dialog-text").innerHTML = cardData.description;
+    EditMenuDialog.querySelector(".dialog-menu-description").innerHTML = cardData.description;
     let shortStartDate = formatDate(cardData.startDate);
     EditMenuDialog.querySelector(".dialog-start-date").value = shortStartDate;
     let shortEndDate = formatDate(cardData.endDate);
@@ -231,7 +231,7 @@ async function closeAndSaveData() {
         id: editedTaskId.id,
         title: EditMenuDialog.querySelector(".dialog-title").value,
         assignedTo: document.querySelector(".dialog-assigned").value,
-        description: document.querySelector(".dialog-text").value,
+        description: document.querySelector(".dialog-menu-description").value,
         startDate: EditMenuDialog.querySelector(".dialog-start-date").innerHTML,
         endDate: EditMenuDialog.querySelector(".dialog-end-date").innerHTML,
         status: EditMenuDialog.querySelector(".dialog-status").innerHTML,

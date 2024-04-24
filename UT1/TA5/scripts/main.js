@@ -86,7 +86,7 @@ async function putTaskToServer(serverIp, task) {
             let task = await response.json();
             return task;
         }
-        
+
     } catch (error) {
         return [];
     }
@@ -153,7 +153,8 @@ async function addNewCardToTable(table) {
         comments: ["Comentarios"],
     }
     let newTask = await postTaskToServer(serverIp, newCard);
-    table.cards.push(newTask);
+    table = getTableFromServer(serverIp);
+    return newTask;
 }
 
 function createHtmltable(table) {
@@ -169,12 +170,26 @@ function createHtmltable(table) {
 }
 
 async function addCard(table) {
-    // console.log("add Card")
-    await addNewCardToTable(table);
-    // TODO change to a function that updates only the new card.
-    // createHtmlCards(table.cards, table);
-    createHtmlElements();
+    try {
+        let newCard = await addNewCardToTable(table);
+        if (!newCard.id) {
+            console.error('Failed to add new card:', newCard);
+            return;
+        }
+        await createHtmlElements();
+
+        let newCardHTML = document.querySelector(`#id-${newCard.id}`);
+        console.log(newCardHTML);
+        if (newCardHTML) {
+            newCardHTML.addEventListener('click', () => dialogPopUp(newCard));
+        } else {
+            console.error('New card element not found in the DOM:', newCard.id);
+        }
+    } catch (error) {
+        console.error('Error in addCard function:', error);
+    }
 }
+
 
 
 function createHtmlCards(cards, tableHtml) {
@@ -219,7 +234,7 @@ function dialogPopUp(cardData) {
     EditMenuDialog.showModal();
 }
 function formatDate(dateString) {
-    if(dateString == null || dateString == undefined){
+    if (dateString == null || dateString == undefined) {
         return "01/01/2000";
     }
     dateParts = dateString.split("/");
@@ -239,7 +254,7 @@ async function closeAndSaveData() {
     }
     let newTask = await putTaskToServer(serverIp, taskFromDialog);
     console.log(newTask);
-    let taskHtml = document.querySelector("#id-"+ newTask.id);
+    let taskHtml = document.querySelector("#id-" + newTask.id);
     if (taskHtml) {
         updateCardHtml(taskHtml, newTask);
     } else {

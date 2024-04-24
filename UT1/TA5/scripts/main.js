@@ -152,7 +152,7 @@ async function addNewCardToTable(table) {
         priority: "Priority",
         comments: ["Comentarios"],
     }
-    let newTask = await putTaskToServer(serverIp, newCard);
+    let newTask = await postTaskToServer(serverIp, newCard);
     table.cards.push(newTask);
 }
 

@@ -229,15 +229,16 @@ function formatDate(dateString) {
 async function closeAndSaveData() {
     let taskFromDialog = {
         id: editedTaskId.id,
-        title: EditMenuDialog.querySelector(".dialog-title").value,
-        assignedTo: document.querySelector(".dialog-assigned").value,
-        description: document.querySelector(".dialog-menu-description").value,
+        title: EditMenuDialog.querySelector(".dialog-title").innerHTML,
+        assignedTo: document.querySelector(".dialog-assigned").innerHTML,
+        description: document.querySelector(".dialog-menu-description").innerHTML,
         startDate: EditMenuDialog.querySelector(".dialog-start-date").innerHTML,
         endDate: EditMenuDialog.querySelector(".dialog-end-date").innerHTML,
         status: EditMenuDialog.querySelector(".dialog-status").innerHTML,
         priority: EditMenuDialog.querySelector(".dialog-priority").innerHTML,
     }
     let newTask = await putTaskToServer(serverIp, taskFromDialog);
+    console.log(newTask);
     let taskHtml = document.querySelector("#id-"+ newTask.id);
     if (taskHtml) {
         updateCardHtml(taskHtml, newTask);

@@ -1,23 +1,124 @@
-const cardTemplate = document.getElementById("card-template").cloneNode(true);
+const CardTemplate = document.getElementById("card-template").cloneNode(true);
 document.getElementById("card-template").remove();
-const tableTempalte = document.getElementById("table-0").cloneNode(true);
-const editMenuDialog = document.getElementById("dialog-edit-menu");
-let selectedCard = null;
-tablesArray = [];
-
+const TableTempalte = document.getElementById("table-0").cloneNode(true);
+const EditMenuDialog = document.getElementById("dialog-edit-menu");
+let selectedTask = null;
+let tablesArray = [];
+const serverIp = "http://localhost:3000/api/tasks";
+let editedTaskId = null;
 InitializeApp();
 
-function InitializeApp() {
+async function InitializeApp() {
+    tablesArray[0] = await getTableFromServer(serverIp);
+    console.log("Table from server: \n", tablesArray);
+    tablesArray.forEach(element => {
+        console.log("Elements", element)
+    });
 
     emptyHtmlTableContent();
-    newTable();
     createHtmlElements();
     addEvents();
+}
+
+async function getTableFromServer(serverIp) {
+    try {
+        let response = await fetch(serverIp);
+        let data = await response.json();
+        let table = {
+            index: tablesArray.length,
+            cards: data,
+        }
+        return table;
+    } catch (error) {
+        return [];
+    }
+}
+async function getTaskFromServer(serverIp, taskId) {
+    try {
+        let response = await fetch(serverIp + "/" + taskId);
+        let data = await response.json();
+        return data;
+    } catch (error) {
+        return [];
+    }
+}
+async function postTaskToServer(serverIp, task) {
+    try {
+        let response = await fetch(serverIp,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "aplication/json",
+                },
+                body: JSON.stringify(task)
+            }
+        );
+        if (!response.ok) {
+            console.log(response.statusText);
+            return;
+        }
+        if (response.ok) {
+            let task = await response.json();
+            return task;
+        }
+    } catch (error) {
+        return [];
+    }
+}
+async function putTaskToServer(serverIp, task) {
+    let serverIpPlusId = serverIp + "/" + task.id
+    console.log(serverIpPlusId)
+    try {
+        let response = await fetch(serverIpPlusId,
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(task)
+            }
+        );
+        if (!response.ok) {
+            console.log(response.statusText);
+            return;
+        }
+        if (response.ok) {
+            let task = await response.json();
+            return task;
+        }
+        
+    } catch (error) {
+        return [];
+    }
+}
+
+async function deletTaskFromServer(serverIp, taskId) {
+    try {
+        let response = await fetch(serverIp + "/" + taskId,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "aplication/json",
+                },
+            }
+        );
+        if (!response.ok) {
+            console.log(response.statusText);
+            return;
+        }
+        if (response.ok) {
+            let task = await response.json();
+            return task;
+        }
+    } catch (error) {
+        return [];
+    }
 }
 
 function createHtmlElements() {
     // creates all the tables from tablesArray
     emptyHtmlTableContent();
+
     for (let index = 0; index < tablesArray.length; index++) {
         const table = tablesArray[index];
         createHtmltable(table)
@@ -30,27 +131,17 @@ function emptyHtmlTableContent() {
         tableContainer.removeChild(tableContainer.firstChild);
     }
 }
+
 function newTable() {
     let table = {
         index: tablesArray.length,
         cards: [],
     }
-    let card = {
-        title: "Title",
-        description: "Description",
-        assignedTo: "Assigned To",
-        startDate: "Start Date",
-        endDate: "End Date",
-        status: "Status",
-        priority: "Priority",
-        comments: ["Comentarios"],
-    }
-    table.cards[0] = card
     tablesArray.push(table)
     createHtmlElements()
 }
 
-function addCardToTable(table) {
+async function addNewCardToTable(table) {
     let newCard = {
         title: "Title",
         description: "Description",
@@ -61,13 +152,14 @@ function addCardToTable(table) {
         priority: "Priority",
         comments: ["Comentarios"],
     }
-    table.cards.push(newCard);
-    createHtmlElements();
+    let newTask = await putTaskToServer(serverIp, newCard);
+    table.cards.push(newTask);
 }
 
 function createHtmltable(table) {
+
     const tableContainer = document.getElementById("table-container");
-    const newTable = tableTempalte.cloneNode(true);
+    const newTable = TableTempalte.cloneNode(true);
     newTable.display = "flex";
     newTable.id = `table-${table.index}`
     createHtmlCards(table.cards, newTable);
@@ -75,53 +167,84 @@ function createHtmltable(table) {
     button.addEventListener('click', () => addCard(table));
     tableContainer.appendChild(newTable);
 }
-function addCard(table) {
-    console.log("add Card")
-    addCardToTable(table);
+
+async function addCard(table) {
+    // console.log("add Card")
+    await addNewCardToTable(table);
+    // TODO change to a function that updates only the new card.
+    // createHtmlCards(table.cards, table);
     createHtmlElements();
 }
+
 
 function createHtmlCards(cards, tableHtml) {
     for (let index = 0; index < cards.length; index++) {
         const card = cards[index];
-        const cardHtml = cardTemplate.cloneNode(true);
+        let cardHtml = CardTemplate.cloneNode(true);
         cardHtml.display = "flex"
         updateCardHtml(cardHtml, card);
-        console.log(tableHtml);
-        let cardList = tableHtml.getElementsByClassName("card-list")[0];
+        // console.log("card", cardHtml);
+        let cardList = tableHtml.querySelector(".card-list");
         cardList.appendChild(cardHtml);
     }
 }
 
 function updateCardHtml(cardHtml, cardData) {
-    cardHtml.getElementsByClassName("card-title")[0].innerHTML = cardData.title;
-    cardHtml.getElementsByClassName("card-text")[0].innerHTML = cardData.description;
-    cardHtml.addEventListener('click', () => DialogEditCard(cardData));
+    // console.log("update card", cardData)
+    cardHtml.id = "id-" + cardData.id;
+    cardHtml.querySelector(".card-title").innerHTML = cardData.title;
+    cardHtml.querySelector(".card-assigned").innerHTML = cardData.assignedTo;
+    cardHtml.querySelector(".card-text").innerHTML = cardData.description;
+    cardHtml.querySelector(".card-start-date").innerHTML = cardData.startDate;
+    cardHtml.querySelector(".card-end-date").innerHTML = cardData.endDate;
+    cardHtml.querySelector(".card-status").innerHTML = cardData.status;
+    cardHtml.querySelector(".card-priority").innerHTML = cardData.priority;
+    // addComments(cardHtml.querySelector(".card-comments"), cardData.priority);  
+    cardHtml.addEventListener('click', () => dialogPopUp(cardData));
+    return cardHtml;
 }
 
-function DialogEditCard(cardData) {
-    console.log("edit card pop up");
-    selectedCard = cardData;
-    dialogTitle = editMenuDialog.getElementsByClassName("dialog-title")[0];
-    dialogTitle.value = cardData.title;
-    menuTextArea = editMenuDialog.getElementsByTagName("textarea")[0];
-    menuTextArea.value = cardData.description;
-    editMenuDialog.showModal();
+function dialogPopUp(cardData) {
+    // console.log("edit card pop up");
+    editedTaskId = cardData;
+    EditMenuDialog.querySelector(".dialog-title").innerHTML = cardData.title;
+    EditMenuDialog.querySelector(".dialog-assigned").innerHTML = cardData.assignedTo;
+    EditMenuDialog.querySelector(".dialog-text").innerHTML = cardData.description;
+    let shortStartDate = formatDate(cardData.startDate);
+    EditMenuDialog.querySelector(".dialog-start-date").value = shortStartDate;
+    let shortEndDate = formatDate(cardData.endDate);
+    EditMenuDialog.querySelector(".dialog-end-date").value = shortEndDate;
+    EditMenuDialog.querySelector(".dialog-status").innerHTML = cardData.status;
+    EditMenuDialog.querySelector(".dialog-priority").innerHTML = cardData.priority;
+    EditMenuDialog.showModal();
+}
+function formatDate(dateString) {
+    if(dateString == null || dateString == undefined){
+        return "01/01/2000";
+    }
+    dateParts = dateString.split("/");
+    return dateShort = dateParts[2] + "-" + dateParts[1] + "-" + dateParts[0];
 }
 
-function closeAndSaveData() {
-    console.log("close")
-    dialogTitle = editMenuDialog.getElementsByClassName("dialog-title")[0];
-    selectedCard.title = dialogTitle.value;
-    dialogTitle.value = "";
-    menuTextArea = editMenuDialog.getElementsByTagName("textarea")[0];
-    selectedCard.description = menuTextArea.value;
-    menuTextArea.value = "";
-    selectedCard = null;
-
-    editMenuDialog.getElementsByTagName("textarea")[0].value = "";
-    editMenuDialog.close();
-    createHtmlElements();
+async function closeAndSaveData() {
+    let taskFromDialog = {
+        id: editedTaskId.id,
+        title: EditMenuDialog.querySelector(".dialog-title").value,
+        assignedTo: document.querySelector(".dialog-assigned").value,
+        description: document.querySelector(".dialog-text").value,
+        startDate: EditMenuDialog.querySelector(".dialog-start-date").innerHTML,
+        endDate: EditMenuDialog.querySelector(".dialog-end-date").innerHTML,
+        status: EditMenuDialog.querySelector(".dialog-status").innerHTML,
+        priority: EditMenuDialog.querySelector(".dialog-priority").innerHTML,
+    }
+    let newTask = await putTaskToServer(serverIp, taskFromDialog);
+    let taskHtml = document.querySelector("#id-"+ newTask.id);
+    if (taskHtml) {
+        updateCardHtml(taskHtml, newTask);
+    } else {
+        console.error("No se encontró el elemento con ID:", newTask.id);
+    }
+    EditMenuDialog.close();
 }
 
 function addEvents() {
@@ -131,8 +254,8 @@ function addEvents() {
         button.addEventListener('click', () => addCard(button));
     }
     // dialog pop up button 
-    const editMenuCloseButton = editMenuDialog.getElementsByClassName("box-menu-Button")[0];
-    console.log(editMenuCloseButton);
+    const editMenuCloseButton = EditMenuDialog.getElementsByClassName("box-menu-Button")[0];
+    // console.log(editMenuCloseButton);
     editMenuCloseButton.addEventListener('click', () => closeAndSaveData());
     // add table button 
     const addTableButton = document.getElementById("add-new-table");
@@ -149,5 +272,5 @@ function toggleDarkMode() {
     } else {
         bodyStyle.backgroundColor = "var(--dark)";
     }
-
 }
+

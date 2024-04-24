@@ -33,25 +33,41 @@
 					<button class="material-symbols-outlined box-menu-Button alingment">menu</button>
 				</menu>
 				<div class="card-list">
+					<!-- Card template -->
 					<div class="card" id="card-template">
-						<h3 class="card-title">Title</h3>
-						<p class="card-text"></p>
+						<h3 class="card-title no-margin">Title</h3>
+						<h4 class="card-assigned no-margin"></h4>
+						<p class="card-text no-margin"></p>
+						<p class="card-start-date no-margin"></p>
+						<p class="card-end-date no-margin"></p>
+						<p class="card-status no-margin"></p>
+						<p class="card-priority no-margin"></p>
+						<div class="card-comments no-margin"></div>
 					</div>
 				</div>
-				<!-- here the tasks will be -->
 				<menu class="box-menu-bottom">
 					<button class="add-todo-item">Add Card</button>
 				</menu>
 			</div>
 		</div>
 	</div>
-
+	<!-- Edit menu dialog -->
 	<dialog id="dialog-edit-menu">
-		<input type="text" class="dialog-title"></input>
 		<button class="material-symbols-outlined box-menu-Button" id="edit-card-menu-close-button">save</button>
-
-		<textarea id="edit-card-menu-content"></textarea>
+		<h1 class="dialog-title dialog-text" contenteditable="true"></h1>
+		<h3 class="dialog-assigned dialog-text" contenteditable="true">
+			Assigned To
+		</h3>
+		<textarea class="dialog-text dialog-menu-description">
+				Description
+		</textarea>
+		<input type="date" class="dialog-start-date dialog-text no-margin"></input>
+		<input type="date" class="dialog-end-date dialog-text no-margin"></input>
+		<p class="dialog-status no-margin" contenteditable="true"></p>
+		<p class="dialog-priority no-margin" contenteditable="true"></p>
+		<div class="dialog-comments no-margin" contenteditable="true"></div>
 	</dialog>
 	<script src="scripts\main.js"></script>
 </body>
+
 </html>

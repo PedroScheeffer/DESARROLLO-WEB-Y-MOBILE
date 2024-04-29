@@ -3,21 +3,28 @@ import './App.css'
 import MyButton from './components/MyButton'
 
 function App() {
-  let counter = 0;
+  const [counter, setCounter] = useState(0);
+
   return (
-    <>
+    <div className='App'>
       <h1 className='counter'>{counter}</h1>
       <div className="button-container">
-        <MyButton text="Add" color="blue" />
-        <MyButton text="Substract" color="red" />
-        <MyButton text="Clear" color="green" />
+        <MyButton onClickHandler={clickAdd} text="Add" color="blue" />
+        <MyButton onClickHandler={clickSubstract} text="Substract" color="red" />
+        <MyButton onClickHandler={clickReset} text="Clear" color="green" />
       </div>
-    </>
-
+    </div >
   )
+  function clickAdd() {
+    setCounter(counter + 1);
+  }
+  function clickSubstract() {
+    setCounter(counter - 1);
+  }
+  function clickReset() {
+    setCounter(0);
+  }
+
 }
 
-function Counter({ counter }) {
-
-}
 export default App

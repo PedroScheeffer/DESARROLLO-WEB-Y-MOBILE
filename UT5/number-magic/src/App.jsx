@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div
-      className='App  focus-in-expand'>
+      className='App'>
       <p>{pcText}</p>
       <div className="button-container ">
         <MyButton onClickHandler={clickBigger} text="Bigger" color="blue" />

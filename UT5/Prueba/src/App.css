@@ -5,8 +5,13 @@
   text-align: center;
 }
 
-.buttons {
+.button-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  gap: 1rem;
+}
+
+.counter{
+  margin-bottom: 5rem;
 }

@@ -4,8 +4,9 @@ import { Link } from "react-router-dom"
 export default function NavigationExample() {
     return (
         < >
-            <p>Podemos crear un link estilo anchor utilizando <span className="highlight"> import {"{Link}"} from "react-router-dom"</span></p>
-
+            <p>Podemos crear un link, del estilo anchor utilizando {"{Link}"}</p>
+            <br />
+            <p> Tambien podemos crear links usando useNavigate.</p>
 
         </>
     );

@@ -1,0 +1,39 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  /* padding: 2rem; */
+  text-align: center;
+}
+
+:root {
+  /* --primary: #daffea; */
+  --primary:
+    #0eacf6;
+  --primary-light:
+    #64C2ED;
+  --secondary:
+    #daffea;
+  --secondary-light:
+    #D4FFF1;
+  --tertiary:
+    #fea592;
+  --dark:
+    #0A1126;
+  --light:
+    #F2F2F2;
+}
+
+@media (width > 800px) {
+  .table {
+    display: flex;
+    flex-direction: row;
+    max-width: 80rem;
+    min-width: 30rem;
+    align-items: flex-start;
+    align-self: flex-start;
+  }
+
+  #table-container {
+    display: flex;
+  }
+}

@@ -1,0 +1,17 @@
+.column{
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+    /* box border */
+    border-style: solid;
+    border-color: var(--dark);
+    border-width: 1/20rem;
+    border-radius: 4px;
+
+    padding: 0.4rem;
+    width: 90%;
+    margin: 0.2rem;
+    background-color: var(--primary);
+
+    box-shadow: 30px 15px 5px #53527F;
+}

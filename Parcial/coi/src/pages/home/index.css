@@ -1,0 +1,20 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (width > 800px) {
+    .table{
+
+        flex-direction: row;
+    }
+}
+
+.header{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    text-align: center;      
+      
+}

@@ -1,0 +1,14 @@
+.default-button {
+    background-color: var(--secondary);
+}
+.blue{
+    align-self: flex-end;
+    background-color: #a4d8ff;
+    margin-bottom: 3rem ;
+
+}
+
+button{
+    border-width: 0.2rem;
+    border-color: black;
+}

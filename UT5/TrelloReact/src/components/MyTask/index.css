@@ -1,0 +1,29 @@
+.task {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--primary-light);
+    min-height: 10vh;
+    max-height: 60vh;
+    min-width: 12rem;
+    margin-bottom: 0.25rem;
+    gap: 0.8rem;
+
+    border-style: solid;
+    border-color: var(--dark);
+    border-width: 1px;
+    border-radius: 8px;
+
+    padding: 0.4rem;
+    padding-top: 0.1rem;
+}
+
+.no-margin{
+    margin: 0;
+}
+
+.bottom-wraper, .dates-wraper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+}
